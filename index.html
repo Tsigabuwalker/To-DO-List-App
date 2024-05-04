@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="header">To-Do List Of Walker</h1>
+    <div class="input-container">
+      <input type="text" id="todo-input" class="input-field" placeholder="Enter a task">
+      <button id="add-btn" class="add-btn">Add Program</button>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+
+  <script>
+    // Get the necessary elements
+    const todoInput = document.getElementById('todo-input');
+    const addBtn = document.getElementById('add-btn');
+    const todoList = document.getElementById('todo-list');
+
+    // Add event listener to the Add button
+    addBtn.addEventListener('click', function() {
+      const task = todoInput.value.trim();
+      if (task !== '') {
+        addTask(task);
+        todoInput.value = '';
+      }
+    });
+
+    // Add a new task to the list
+    function addTask(task) {
+      const todoItem = document.createElement('div');
+      todoItem.classList.add('todo-item');
+
+      const todoText = document.createElement('span');
+      todoText.classList.add('todo-text');
+      todoText.textContent = task;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.textContent = 'X';
+
+      deleteBtn.addEventListener('click', function() {
+        todoItem.remove();
+      });
+
+      todoItem.appendChild(todoText);
+      todoItem.appendChild(deleteBtn);
+      todoList.appendChild(todoItem);
+    }
+  </script>
+</body>
+</html>
